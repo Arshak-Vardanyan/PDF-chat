@@ -9,7 +9,7 @@ type Message = {
 
 type ApiResponse = {
   response?: string;
-  [key: string]: any;
+  [key: string]: string | undefined;
 };
 
 export default function HomePage() {
@@ -19,7 +19,6 @@ export default function HomePage() {
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Автопрокрутка вниз при добавлении сообщения
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -74,7 +73,6 @@ export default function HomePage() {
     <div className='bg-gray-100'>
         <div className="flex flex-col justify-between h-screen w-full mx-auto font-sans">
             <h1 className="text-2xl font-bold my-6 text-center">PDF Chat API Tester</h1>
-            {/* Сообщения */}
             <div className="flex flex-col flex-1 overflow-y-auto p-4 space-y-4">
                 {messages.map((msg, idx) => (
                 <div
@@ -94,7 +92,6 @@ export default function HomePage() {
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* Форма ввода */}
             <form
                 onSubmit={handleSubmit}
                 className="p-4 flex items-center gap-2 mb-5 w-full max-w-4xl mx-auto"
@@ -120,4 +117,3 @@ export default function HomePage() {
     </div>
   );
 }
-
