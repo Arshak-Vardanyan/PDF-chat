@@ -9,8 +9,8 @@ type Message = {
 };
 
 type ApiResponse = {
-  response?: string;
-  [key: string]: string | undefined;
+  response: string;
+  [key: string]: string;
 };
 
 export default function HomePage() {
