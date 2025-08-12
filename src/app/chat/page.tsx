@@ -26,12 +26,12 @@ export default function HomePage() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-    useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      router.replace('/login');
-    }
-  }, [router]);
+    // useEffect(() => {
+    //     const token = localStorage.getItem('token');
+    //     if (!token) {
+    //     router.replace('/login');
+    //     }
+    // }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,15 +79,17 @@ export default function HomePage() {
     }
   };
 
-  return (
-    <div className='bg-gray-100'>
-        <div className="flex flex-col justify-between h-screen w-full mx-auto font-sans">
-            <h1 className="text-2xl font-bold my-6 text-center">PDF Chat API Tester</h1>
-            <div className="flex flex-col flex-1 overflow-y-auto p-4 space-y-4">
+    return (
+        <div className="bg-gray-100 min-h-screen flex flex-col">
+            <h1 className="text-2xl font-bold my-6 text-center sticky top-0 z-10">PDF Chat API Tester</h1>
+
+            <div className="flex-1 flex flex-col max-w-[80%] mx-auto w-full">
+
+            <div className="flex-1 flex flex-col overflow-y-auto p-4 space-y-4">
                 {messages.map((msg, idx) => (
                 <div
                     key={idx}
-                    className={`p-2 rounded-xl inline-block max-w-[80%]  ${
+                    className={`p-2 rounded-xl inline-block max-w-[80%] ${
                     msg.role === 'user'
                         ? 'bg-gray-200 text-black ml-auto'
                         : 'bg-gray-200 text-gray-800 self-start'
@@ -95,6 +97,7 @@ export default function HomePage() {
                     dangerouslySetInnerHTML={{ __html: msg.content }}
                 />
                 ))}
+
                 {loading && (
                 <div className="text-gray-500 text-sm">Assistant is typing...</div>
                 )}
@@ -104,7 +107,7 @@ export default function HomePage() {
 
             <form
                 onSubmit={handleSubmit}
-                className="p-4 flex items-center gap-2 mb-5 w-full max-w-4xl mx-auto"
+                className="p-4 flex items-center gap-2 bg-gray-100 sticky bottom-0"
             >
                 <input
                 type="text"
@@ -123,7 +126,8 @@ export default function HomePage() {
                 Send
                 </button>
             </form>
+            </div>
         </div>
-    </div>
-  );
+    );
+
 }
